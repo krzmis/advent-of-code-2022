@@ -4,7 +4,6 @@ import main.dev.misiek.utils.FileUtils;
 
 import java.nio.file.Path;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Day1 {
 
@@ -20,7 +19,6 @@ public class Day1 {
 
         for (String cal : cals) {
             if (cal.isEmpty()) {
-
                 elfCount++;
                 localCalTotal = 0;
             } else {
@@ -32,21 +30,18 @@ public class Day1 {
 
         List<Map.Entry<Integer, Integer>> maxEntry = new ArrayList<>(elfToCal.entrySet()
                 .stream()
-                .sorted(Map.Entry.comparingByValue())
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .toList());
 
-        Collections.reverse(maxEntry);
+        System.out.printf("Part 1: %d\n", getMaxCals(maxEntry, 1));
+        System.out.printf("Part 2: %d\n", getMaxCals(maxEntry, 3));
+    }
 
-        System.out.printf("Part 1: %d\n", maxEntry.stream()
+    private static int getMaxCals(List<Map.Entry<Integer, Integer>> maxEntry, int limit) {
+        return maxEntry.stream()
                 .map(Map.Entry::getValue)
-                .limit(1)
+                .limit(limit)
                 .mapToInt(Integer::intValue)
-                .sum());
-
-        System.out.printf("Part 2: %d\n", maxEntry.stream()
-                .map(Map.Entry::getValue)
-                .limit(3)
-                .mapToInt(Integer::intValue)
-                .sum());
+                .sum();
     }
 }

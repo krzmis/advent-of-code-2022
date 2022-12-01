@@ -21,10 +21,10 @@ public class Day1 {
             if (cal.isEmpty()) {
                 elfCount++;
                 localCalTotal = 0;
-            } else {
-                localCalTotal += Integer.parseInt(cal);
+                continue;
             }
 
+            localCalTotal += Integer.parseInt(cal);
             elfToCal.put(elfCount, localCalTotal);
         }
 
